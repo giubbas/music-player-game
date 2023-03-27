@@ -1,0 +1,318 @@
+*{
+  margin: 0px;
+  font-family: 'VT323', monospace;
+}
+
+body{
+  padding: 0px;
+  /* box-sizing: border-box; */
+  background: rgb(49 49 49);
+}
+
+button{
+  cursor: pointer;
+}
+
+main{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#top-controls,
+#down-instructions,
+#canvas-wrapper,
+#cover{
+  border-radius: 7px;
+}
+
+#top-controls,
+#down-instructions,
+#canvas-wrapper{
+  border: 3px solid #b4b4b4;
+}
+
+#top-controls,
+#down-instructions {
+  display: flex;
+  align-items: center;
+  height: 70px;
+  background: black;
+  color: white;
+}
+
+#top-controls{
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-size: 30px;
+  padding: 0 40px;
+}
+
+#top-controls div{
+  display: flex;
+  align-items: center;
+}
+
+#top-controls img{
+  width: 30px;
+  padding-right: 7px;
+}
+
+#sound-btn{
+  background: none;
+  border: none;
+}
+
+#sound-btn img{
+  vertical-align: bottom;
+}
+
+#quit-btn{
+  margin-left: 7px;
+  font-size: 0.7em;
+  padding: 3px 12px;
+}
+
+#cover{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: url("../assets/cover1.gif");
+  color: white;
+  text-align: center;
+}
+#cover h1,
+#cover button{
+  font-family: 'Press Start 2P', cursive;
+}
+
+#cover h1{
+  font-size: 2.6em;
+  padding: 190px 0 25px 0;
+  text-shadow: 6px 4px #3276ab;
+}
+
+#cover h5{
+  font-size: 1.3em;
+  line-height: 1.2;
+}
+
+#cover button{
+  cursor: pointer;
+  background: black;
+  margin-top: 60px;
+  padding: 15px 50px;
+  color: white;
+  font-size: 18px;
+  font-size: 0.7em;
+  box-shadow: 1px 1px white, 2px 2px white, 3px 3px white, 4px 4px white;
+  cursor: pointer;
+  border: 2px solid white;
+}
+
+#canvas-wrapper{
+  position: relative;
+  width: fit-content;
+  height: 600px;
+}
+
+.box{
+  position: absolute;
+}
+
+.dialogue-window-bottom{
+  bottom: 10px;
+  font-size: 1.4em;
+  padding: 15px;
+  width: 450px;
+  height: 60px;
+  left: 75px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: white;
+  color: black;
+  border: 3px solid black;
+}
+
+.central-window{
+  padding: 25px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: black;
+  color: white;
+  border: 2px solid white;
+}
+
+.dialogue-btn,
+#jukebox-close-btn{
+  background: none;
+  border: none;
+  color: white;
+  position: absolute;
+  font-size: 18px;
+}
+
+.dialogue-btn{
+  text-decoration: underline;
+  bottom: 10px;
+  right: 10px;
+}
+
+#book-stand-display p{
+  clear: both;
+  padding: 5px 0;
+}
+
+#music-player-display{
+  width: 300px;
+}
+
+#music-player-display h2{
+  font-size: 2.3em;
+  padding-bottom: 15px;
+}
+
+#music-player-credit-container{
+  justify-content: space-between;
+}
+
+#insert-coin-btn{
+  background: white;
+  padding: 3px 7px;
+  font-size: 1em;
+}
+
+#music-player-credit-container,
+#music-player-credit-container div
+{
+  display: flex;
+  align-items: center;
+}
+
+#music-player-credit-container div{
+  width: 100px;
+  float: right;
+  font-size: 1.2em;
+  justify-content: space-evenly;
+}
+
+#music-player-credit-container img{
+  width: 20px;
+}
+
+#jukebox-close-btn{
+  right: 10px;
+  top: 10px;
+}
+
+#tracklist{
+  padding: 25px 0 0 0;
+}
+
+#tracklist > div {
+  padding: 0 0 12px 0;
+}
+
+#tracklist h5{
+  font-size: 18px;
+}
+
+.audio-controls{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 7px 0 0 0;
+}
+
+.audio-controls input{
+  margin: 0 7px;
+}
+
+.jukebox-play-btn{
+  background: none;
+  border: none;
+  color: white;
+  width: 22px;
+  font-size: 20px;
+  margin-right: 7px;
+}
+
+#insufficient-credit-window{
+  text-align: center;
+}
+
+#insufficient-credit-window h3{
+  font-size: 2.1em;
+  padding-bottom: 10px;
+  color: #DF2E38;
+}
+
+input[type="range"]{
+  width: 170px;
+  -webkit-appearance: none;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  height: 3px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  position: relative;
+  -webkit-appearance: none;
+  box-sizing: content-box;
+  border: 1px solid black;
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  background-color: #fff;
+  cursor: pointer;
+  margin: -7px 0 0 0;
+}
+
+input[type="range"]:active::-webkit-slider-thumb {
+  transform: scale(1.2);
+  background: white;
+}
+
+#down-instructions{
+  justify-content: space-around;
+  margin-top: 10px;
+}
+
+#down-instructions div{
+  display: flex;
+  align-items: center;
+}
+
+#down-instructions > :first-child img{
+  margin-right: 15px;
+}
+
+#down-instructions img{
+  width: 70px;
+}
+
+#down-instructions h4{
+  font-size: 1.4em;
+}
+
+@-webkit-keyframes pulse{
+  from {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+
+  50% {
+    -webkit-transform: scale3d(1.05, 1.05, 1.05);
+    transform: scale3d(1.05, 1.05, 1.05);
+  }
+
+  to {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+}

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Music player game</title>
+  <link rel="stylesheet" href="styles/main.css">
+  <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/143b780cef.js" crossorigin="anonymous"></script>
+  <script src="data/collisions.js"></script>
+  <script src="data/coins.js"></script>
+  <script src="scripts/app.js"></script>
+  <script src="data/audio.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+</head>
+<body>
+  <main>
+    <div id="top-controls">
+      <div>
+        <img src="./assets/coin-images/credit-coin.png" />
+        <label id="coins-owned">0</label>
+      </div>
+      <div>
+        <button id="sound-btn">
+          <img src="assets/sound.png" alt="audio" />
+        </button>
+        <button id="quit-btn">Quit</button>
+      </div>
+    </div>
+    <div id="canvas-wrapper">
+      <div id="cover">
+        <h1>Music player</h1>
+        <h5>A collection of beats made in April 2021 <br /> by Riccardo Giubilo.</h5>
+        <button class="pulse animated infinite" id="start-btn">START</button>
+      </div>
+      <canvas></canvas>
+    </div>
+    <div id="down-instructions">
+      <div>
+        <img src="assets/arrow-keys.png" alt="arrow-keys" />
+        <h4>Movement</h4>
+      </div>
+      <div>
+        <img src="assets/enter-key.png" alt="arrow-keys" />
+        <h4>Interact</h4>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
