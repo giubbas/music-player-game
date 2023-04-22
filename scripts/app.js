@@ -460,6 +460,7 @@ function init() {
         break
       case 'jukebox-close-btn':
         animate()
+        soundBtn.style.display = 'inline-block'
         roomTone.play()
         musicPlayer.style.display = 'none'
         resetPlayer()
@@ -498,13 +499,15 @@ function init() {
     cover.style.display = 'none'
     movables = [background, ...boundaries, foreground, ...coinsObjArr, bookStand, jukebox, museumPiece]
     animate()
-    roomTone.play()
+    soundBtn.style.display = 'inline-block'
+    sound && roomTone.play()
   }
 
   const quit = () => {
     cover.style.display = 'inline-block'
     window.cancelAnimationFrame(requestID)
     roomTone.pause()
+    soundBtn.style.display = 'none'
     roomTone.currentTime = 0
     // Reset player position and image
     player.position = {

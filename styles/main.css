@@ -60,6 +60,7 @@ main{
 }
 
 #sound-btn{
+  display: none;
   background: none;
   border: none;
 }
@@ -135,6 +136,10 @@ main{
   background: white;
   color: black;
   border: 3px solid black;
+}
+
+.dialogue-window-bottom button{
+  color: black;
 }
 
 .central-window{
@@ -300,7 +305,7 @@ input[type="range"]:active::-webkit-slider-thumb {
   font-size: 1.4em;
 }
 
-@-webkit-keyframes pulse{
+/* @-webkit-keyframes pulse{
   from {
     -webkit-transform: scale3d(1, 1, 1);
     transform: scale3d(1, 1, 1);
@@ -315,4 +320,4 @@ input[type="range"]:active::-webkit-slider-thumb {
     -webkit-transform: scale3d(1, 1, 1);
     transform: scale3d(1, 1, 1);
   }
-}
+} */
