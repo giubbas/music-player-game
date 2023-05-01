@@ -282,7 +282,7 @@ function init() {
       museumPieceBox.className = 'box dialogue-window-bottom'
       museumPieceBox.id = 'museum-piece-display'
       museumPieceBox.innerHTML = `
-      <p>These are rare Juniprosaurus remains.</p>
+      <p>These are some rare Juniprosaurus remains.</p>
       <button class="dialogue-btn" id="museum-piece">Close</button>
       `
       canvasWrapper.appendChild(museumPieceBox)
@@ -291,11 +291,11 @@ function init() {
   }
 
   const displayTrackList = () => {
-    for (let i = 0; i < 7; i++) {
+    for (let i = 0; i < 6; i++) {
       const beat = eval(`beat${i}`)
       const track = document.createElement('div')
       track.innerHTML = `
-      <h5>Beat</h5>
+      <h5>${beat.name}</h5>
       <div class="audio-controls">
         <button id="${i}" value="stop" name="beat${i}"><i class="fa-solid fa-play"></i></button>
         <div>
@@ -378,6 +378,13 @@ function init() {
       coinsOwned--
       coinsOwnedDisplay.innerText = coinsOwned
       jukeboxCreditDisplay.innerText = jukeboxCredit
+      if (sound) {
+        coinDropSound.currentTime = 0
+        coinDropSound.play()
+      }
+    } else if (!coinsOwned > 0 && sound) {
+      insertCoinFail.currentTime = 0
+      insertCoinFail.play()
     }
   }
 
@@ -467,7 +474,6 @@ function init() {
         break
       case 'insert-coin-btn':
         insertCoin()
-        sound && coinDropSound.play()
         break
     }
   }
@@ -643,7 +649,10 @@ function init() {
                 coinsObjArr.splice(i, 1)
                 coinsOwned++
                 coinsOwnedDisplay.innerText = coinsOwned
-                pickupCoin.play()
+                if (sound) {
+                  pickupCoin.currentTime = 0
+                  pickupCoin.play()
+                }
                 break
               case 'bookStand':
                 callToAction()
@@ -689,7 +698,10 @@ function init() {
                 coinsObjArr.splice(i, 1)
                 coinsOwned++
                 coinsOwnedDisplay.innerText = coinsOwned
-                sound && pickupCoin.play()
+                if (sound) {
+                  pickupCoin.currentTime = 0
+                  pickupCoin.play()
+                }
                 break
               case 'bookStand':
                 callToAction()
@@ -735,7 +747,10 @@ function init() {
                 coinsObjArr.splice(i, 1)
                 coinsOwned++
                 coinsOwnedDisplay.innerText = coinsOwned
-                sound && pickupCoin.play()
+                if (sound) {
+                  pickupCoin.currentTime = 0
+                  pickupCoin.play()
+                }
                 break
               case 'bookStand':
                 callToAction()
@@ -781,7 +796,10 @@ function init() {
                 coinsObjArr.splice(i, 1)
                 coinsOwned++
                 coinsOwnedDisplay.innerText = coinsOwned
-                sound && pickupCoin.play()
+                if (sound) {
+                  pickupCoin.currentTime = 0
+                  pickupCoin.play()
+                }
                 break
               case 'bookStand':
                 callToAction()

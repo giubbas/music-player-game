@@ -219,7 +219,7 @@ main{
 }
 
 #tracklist > div {
-  padding: 0 0 12px 0;
+  padding: 0 0 20px 0;
 }
 
 #tracklist h5{
@@ -321,3 +321,19 @@ input[type="range"]:active::-webkit-slider-thumb {
     transform: scale3d(1, 1, 1);
   }
 } */
+#test{
+  display: none;
+  text-align: center;
+}
+
+@media only screen and (max-width: 1025px) {
+  #test{
+    display: block;
+  }
+
+  #top-controls,
+  #canvas-wrapper,
+  #down-instructions{
+    display: none;
+  }
+}
