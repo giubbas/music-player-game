@@ -407,7 +407,6 @@ function init() {
   const jukeboxPlayBeat = (e) => {
     const audio = eval(e.currentTarget.name)
     const btn = e.currentTarget
-    console.log('event --->', btn)
     if (jukeboxCredit > 0 && (!audio.value || audio.value === 'reset')) {
       resetPlayer()
       audio.play()
@@ -424,8 +423,7 @@ function init() {
       audio.value = 'pause'
       btn.innerHTML = '<i class="fa-solid fa-play"></i>'
     } else {
-      console.log('no credit!')
-      noCreditWindow()
+      !document.getElementById('insufficient-credit-btn') && noCreditWindow()
       sound && noCreditSound.play()
     }
   }
@@ -594,7 +592,6 @@ function init() {
     if (sound) {
       sound = false
       roomTone.pause()
-      console.log('sound btn clicked')
       soundBtn.innerHTML = `
       <img src='./assets/sound-off.png' alt='sound-off-btn'/>
       `
