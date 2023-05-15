@@ -20,11 +20,15 @@ roomTone.volume = 0.8
 
 const pickupCoin = new Audio('./assets/audio/pickup-coin.mp3')
 pickupCoin.volume = 0.4
+pickupCoin.load()
 
 const coinDropSound = new Audio('./assets/audio/coin-drop.mp3')
 coinDropSound.volume = 0.4
+coinDropSound.load()
 
 const noCreditSound = new Audio('./assets/audio/no-credit.wav')
+noCreditSound.load()
 
 const insertCoinFail = new Audio('./assets/audio/insert-coin-fail.mp3')
 insertCoinFail.volume = 0.4
+insertCoinFail.load()
