@@ -24,11 +24,8 @@ pickupCoin.preload = 'auto'
 
 const coinDropSound = new Audio('./assets/audio/coin-drop.mp3')
 coinDropSound.volume = 0.4
-coinDropSound.preload = 'auto'
 
 const noCreditSound = new Audio('./assets/audio/no-credit.wav')
-noCreditSound.preload = 'auto'
 
 const insertCoinFail = new Audio('./assets/audio/insert-coin-fail.mp3')
 insertCoinFail.volume = 0.4
-insertCoinFail.preload = 'auto'
