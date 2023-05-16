@@ -20,7 +20,6 @@ roomTone.volume = 0.8
 
 const pickupCoin = new Audio('./assets/audio/pickup-coin.mp3')
 pickupCoin.volume = 0.4
-pickupCoin.preload = 'auto'
 
 const coinDropSound = new Audio('./assets/audio/coin-drop.mp3')
 coinDropSound.volume = 0.4
