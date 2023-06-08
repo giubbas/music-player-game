@@ -16,10 +16,9 @@ const beatsArr = [beat0, beat1, beat2, beat3, beat4, beat5]
 
 const roomTone = new Audio('./assets/audio/roomTone.mp3')
 roomTone.loop = true
-roomTone.volume = 0.8
 
 const pickupCoin = new Audio('./assets/audio/pickup-coin.mp3')
-pickupCoin.volume = 0.4
+// pickupCoin.volume = 0.4
 
 const coinDropSound = new Audio('./assets/audio/coin-drop.mp3')
 coinDropSound.volume = 0.4

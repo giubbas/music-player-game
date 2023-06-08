@@ -4,6 +4,14 @@ function init() {
   let requestID
   let coinsOwned = 0
   let jukeboxCredit = 0
+  let sound = true
+  let jukeboxCreditDisplay
+  let movables
+  let musicPlayer
+  let firstSlownessIssueTimeout
+  let secondSlownessIssueTimeout
+  const collisionsMap = []
+  const boundaries = []
 
   // Elements
   const canvas = document.querySelector('canvas')
@@ -12,17 +20,51 @@ function init() {
   const cover = document.getElementById('cover')
   const startBtn = document.getElementById('start-btn')
   const quitBtn = document.getElementById('quit-btn')
-  const bookStandCloseBtn = document.getElementById('book-stand-close-btn')
-  let jukeboxCreditDisplay
   const coinsOwnedDisplay = document.getElementById('coins-owned')
-  coinsOwnedDisplay.innerText = coinsOwned
   const soundBtn = document.getElementById('sound-btn')
-  let sound = true
+  const browserAlert = document.createElement('main')
+  const body = document.querySelector('body')
+  const main = document.querySelector('main')
+  const turnOffEnergySaverBox = document.createElement('div')
+
+  // Images
+  const map = new Image()
+  map.src = './assets/map.png'
+
+  const foregroundImage = new Image()
+  foregroundImage.src = './assets/foregroundObjects.png'
+
+  const playerUpImage = new Image()
+  playerUpImage.src = './assets/playerUp.png'
+
+  const playerRightImage = new Image()
+  playerRightImage.src = './assets/playerRight.png'
+
+  const playerDownImage = new Image()
+  playerDownImage.src = './assets/playerDown.png'
+
+  const playerLeftImage = new Image()
+  playerLeftImage.src = './assets/playerLeft.png'
+
+  coinsOwnedDisplay.innerText = coinsOwned
+
+  // Browser detection and alert
+  const pleaseSwitchBrowser = () => {
+    main.remove()
+    browserAlert.innerHTML = `
+    <h2 id='switch-browser'>Not available on Safari, please switch browser.</h2>
+    `
+    body.append(browserAlert)
+  }
+
+  // Detect if the user is using Safari
+  if (navigator.userAgent.match('Safari') && !navigator.userAgent.match('Chrome')) {
+    pleaseSwitchBrowser()
+  }
 
   canvas.width = 600
   canvas.height = 600
 
-  const collisionsMap = []
   for (let i = 0; i < collisions.length; i += 50) {
     collisionsMap.push(collisions.slice(i, 50 + i))
   }
@@ -41,8 +83,6 @@ function init() {
       ctx.fillRect(this.position.x, this.position.y, this.width, this.height)
     }
   }
-
-  const boundaries = []
 
   const offset = {
     x: 0,
@@ -64,27 +104,6 @@ function init() {
     })
   }
   collisionsPlacement()
-
-  // Map image
-  const map = new Image()
-  map.src = './assets/map.png'
-
-  // Foreground image
-  const foregroundImage = new Image()
-  foregroundImage.src = './assets/foregroundObjects.png'
-
-  // Player sprites
-  const playerUpImage = new Image()
-  playerUpImage.src = './assets/playerUp.png'
-
-  const playerRightImage = new Image()
-  playerRightImage.src = './assets/playerRight.png'
-
-  const playerDownImage = new Image()
-  playerDownImage.src = './assets/playerDown.png'
-
-  const playerLeftImage = new Image()
-  playerLeftImage.src = './assets/playerLeft.png'
 
   class Sprite {
     constructor({ name, position, velocity, image, frames = {max: 1}, sprites }) {
@@ -204,7 +223,7 @@ function init() {
     }
   })
 
-  interactionsArr = [bookStand, jukebox, museumPiece]
+  const interactionsArr = [bookStand, jukebox, museumPiece]
 
   const keys = {
     ArrowUp: {
@@ -223,8 +242,6 @@ function init() {
       pressed: false
     }
   }
-
-  let movables
 
   function rectangularCollision({rectangle1, rectangle2}) {
     return (
@@ -290,6 +307,7 @@ function init() {
     }
   }
 
+  // Music player
   const displayTrackList = () => {
     for (let i = 0; i < 6; i++) {
       const beat = eval(`beat${i}`)
@@ -346,7 +364,6 @@ function init() {
     }
   }
 
-  let musicPlayer
   const jukeboxInteract = () => {
     if (!musicPlayer) {
       musicPlayer = document.createElement('div')
@@ -444,7 +461,7 @@ function init() {
     })
 
     const buttons = document.querySelectorAll('.jukebox-play-btn')
-    for (item of buttons) {
+    for (const item of buttons) {
       item.innerHTML = '<i class="fa-solid fa-play"></i>'
     }
   }
@@ -476,28 +493,31 @@ function init() {
     }
   }
 
-  // const objectCollision = (obj) => {
-  //   switch(obj.name) {
-  //     case 'boundary':
-  //       moving = false
-  //       break
-  //     case 'coin':
-  //       coinsObjArr.splice(i, 1)
-  //       coinsOwned++
-  //       coinsOwnedDisplay.innerText = coinsOwned
-  //       sound && pickupCoin.play()
-  //       break
-  //     case 'bookStand':
-  //       callToAction()
-  //       break
-  //     case 'jukebox':
-  //       callToAction()
-  //       break
-  //     case 'museumPiece':
-  //       callToAction()
-  //       break
-  //   }
-  // }
+  // Create the "slowness issue" popup
+  const createSlownessIssuePopup = () => {
+    turnOffEnergySaverBox.id = 'energy-mode-box'
+
+    if (!navigator.userAgent.match('Chrome')) {
+      turnOffEnergySaverBox.innerHTML= `
+      <h3>Too slow?</h3>
+      <p>Turn off the Chrome energy saver mode</p>
+      <img src='./assets/turn-off-energy-saver.png' alt='turn-off-icon' />
+      `
+    } else {
+      turnOffEnergySaverBox.innerHTML= `
+      <h3>Too slow?</h3>
+      <p>Turn off your browser's energy saver mode</p>
+      `
+    }
+
+    body.append(turnOffEnergySaverBox)
+  }
+
+  const removeSlownessIssuePopup = () => {
+    turnOffEnergySaverBox.remove()
+    clearTimeout(firstSlownessIssueTimeout)
+    clearTimeout(secondSlownessIssueTimeout)
+  }
 
   const start = () => {
     cover.style.display = 'none'
@@ -505,6 +525,8 @@ function init() {
     animate()
     soundBtn.style.display = 'inline-block'
     sound && roomTone.play()
+    firstSlownessIssueTimeout = setTimeout(createSlownessIssuePopup, 5000)
+    secondSlownessIssueTimeout = setTimeout(removeSlownessIssuePopup, 12000)
   }
 
   const quit = () => {
@@ -513,75 +535,65 @@ function init() {
     roomTone.pause()
     soundBtn.style.display = 'none'
     roomTone.currentTime = 0
-    // Reset player position and image
+
+    const noCreditPopup = document.getElementById('insufficient-credit-window')
+    noCreditPopup && noCreditPopup.remove()
+
     player.position = {
       x: canvas.width / 2 - 200 / 4 / 2,
       y: canvas.height / 2 - 72 / 2
     }
     player.image = playerDownImage
 
-    // Reset background image
     background.position = {
       x: offset.x,
       y: offset.y
     }
 
-    // Reset foreground objects
     foreground.position = {
       x: offset.x,
       y: offset.y
     }
 
-    // Reset coins
     coinsObjArr.splice(0)
     coinsPlacement()
 
-    // Reset boundaries
     boundaries.splice(0)
     collisionsPlacement()
 
-    // Reset book stand position
     bookStand.position = {
       x: 340,
       y: 250,
     }
 
-    // Reset jukebox position
     jukebox.position = {
       x: 780,
       y: 70,
     }
 
-    // Reset museum piece position
     museumPiece.position = {
       x: 1080,
       y: 170,
     }
     
-    // Reset coins
     coinsOwned = 0
     coinsOwnedDisplay.innerText = '0'
 
-    // Reset jukebox credit
     if (jukeboxCreditDisplay)
       jukeboxCreditDisplay.innerText = '0'
 
-    // Reset jukebox credit
     jukeboxCredit = 0
 
-    // Close book stand window
     if (guideBook) {
       guideBook.remove()
       guideBook = null
     }
 
-    // Close music player window
     if (musicPlayer) {
       musicPlayer.style.display = 'none'
       resetPlayer()
     }
 
-    // Close museum piece window
     if (museumPieceBox) {
       museumPieceBox.remove()
       museumPieceBox = null
@@ -589,6 +601,8 @@ function init() {
   }
 
   const soundBtnToggle = () => {
+    const musicPlayer = document.getElementById('music-player-display')
+
     if (sound) {
       sound = false
       roomTone.pause()
@@ -597,7 +611,7 @@ function init() {
       `
     } else {
       sound = true
-      roomTone.play()
+      (!musicPlayer || musicPlayer.style.display === 'none') && roomTone.play()
       soundBtn.innerHTML = `
       <img src='./assets/sound.png' alt='sound-off-btn'/>
       `
