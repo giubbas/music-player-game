@@ -483,7 +483,7 @@ function init() {
       case 'jukebox-close-btn':
         animate()
         soundBtn.style.display = 'inline-block'
-        roomTone.play()
+        sound && roomTone.play()
         musicPlayer.style.display = 'none'
         resetPlayer()
         break
@@ -497,7 +497,7 @@ function init() {
   const createSlownessIssuePopup = () => {
     turnOffEnergySaverBox.id = 'energy-mode-box'
 
-    if (!navigator.userAgent.match('Chrome')) {
+    if (navigator.userAgent.match('Chrome')) {
       turnOffEnergySaverBox.innerHTML= `
       <h3>Too slow?</h3>
       <p>Turn off the Chrome energy saver mode</p>
@@ -602,7 +602,6 @@ function init() {
 
   const soundBtnToggle = () => {
     const musicPlayer = document.getElementById('music-player-display')
-
     if (sound) {
       sound = false
       roomTone.pause()
@@ -611,7 +610,7 @@ function init() {
       `
     } else {
       sound = true
-      (!musicPlayer || musicPlayer.style.display === 'none') && roomTone.play()
+      if (!musicPlayer || musicPlayer.style.display === 'none') roomTone.play()
       soundBtn.innerHTML = `
       <img src='./assets/sound.png' alt='sound-off-btn'/>
       `

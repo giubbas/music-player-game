@@ -18,7 +18,7 @@ const roomTone = new Audio('./assets/audio/roomTone.mp3')
 roomTone.loop = true
 
 const pickupCoin = new Audio('./assets/audio/pickup-coin.mp3')
-// pickupCoin.volume = 0.4
+pickupCoin.volume = 0.3
 
 const coinDropSound = new Audio('./assets/audio/coin-drop.mp3')
 coinDropSound.volume = 0.4
