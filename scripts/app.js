@@ -600,6 +600,10 @@ function init() {
     }
   }
 
+  const enableSoundBtn = () => {
+    soundBtn.disabled = false
+  }
+
   const soundBtnToggle = () => {
     const musicPlayer = document.getElementById('music-player-display')
     if (sound) {
@@ -615,6 +619,8 @@ function init() {
       <img src='./assets/sound.png' alt='sound-off-btn'/>
       `
     }
+    soundBtn.disabled = true
+    setTimeout(enableSoundBtn, 1)
   }
 
   const animate = () => {
